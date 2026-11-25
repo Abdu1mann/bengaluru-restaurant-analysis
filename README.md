@@ -2,7 +2,7 @@
 
 **Goal:** Find which areas, cuisines and price ranges look most promising for a new restaurant in Bengaluru, and which are oversaturated.
 
-![Dashboard](dashboard.png)
+![Dashboard](dashboard.png.png)
 
 ## Dataset
 Zomato Bangalore Restaurants (Kaggle), about 51,700 rows, reduced to 12,480 unique restaurants.
