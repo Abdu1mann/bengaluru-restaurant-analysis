@@ -30,6 +30,9 @@ Python (pandas), SQL (SQLite), Power BI, Gemini API, Streamlit
 ## AskBLR: AI analyst agent
 Ask a question in plain English. An LLM (Gemini) writes the SQL, a read-only runner executes it, and the agent explains the result. It retries automatically when its SQL fails.
 
+**Live demo:**
+https://bengaluru-restaurant-analysis-swpvz6kn7ssn6yc7csj3mp.streamlit.app/
+
 **Evaluation**
 - 16-question test set: 81% on the first run (13/16), 100% after adding column descriptions to the prompt
 - 10 unseen questions: 10/10 (see `eval_results_holdout.csv`)
