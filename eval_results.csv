@@ -1,0 +1,17 @@
+question,correct,fixes,agent_sql
+How many restaurants are there in total?,True,0,SELECT COUNT(*) FROM restaurants;
+What is the average rating of all rated restaurants? Round to 2 decimals.,True,0,"SELECT ROUND(AVG(rate), 2) FROM restaurants;"
+Which 5 areas have the most restaurants?,True,0,"SELECT location, COUNT(*) FROM restaurants GROUP BY location ORDER BY COUNT(*) DESC LIMIT 5;"
+What is the average cost for two across all restaurants? Round to a whole number.,True,0,SELECT ROUND(AVG(cost_for_two)) FROM restaurants;
+How many restaurants offer online ordering?,True,0,SELECT COUNT(*) FROM restaurants WHERE online_order = 'Yes'
+How many restaurants allow table booking?,True,0,SELECT COUNT(*) FROM restaurants WHERE book_table = 'Yes'
+Which 5 cuisines are the most common?,True,0,SELECT cuisine FROM restaurant_cuisines GROUP BY cuisine ORDER BY COUNT(*) DESC LIMIT 5;
+How many restaurants cost more than 1000 for two?,True,0,SELECT COUNT(*) FROM restaurants WHERE cost_for_two > 1000
+Which restaurant has the highest cost for two?,True,0,SELECT name FROM restaurants ORDER BY cost_for_two DESC LIMIT 1;
+Which area has the highest average rating among areas with at least 50 restaurants?,True,0,"SELECT location, AVG(rate) FROM restaurants GROUP BY location HAVING COUNT(*) >= 50 ORDER BY AVG(rate) DESC LIMIT 1;"
+How many North Indian restaurants are there?,True,0,SELECT COUNT(DISTINCT r.restaurant_id) FROM restaurants r JOIN restaurant_cuisines rc ON r.restaurant_id = rc.restaurant_id WHERE rc.cuisine = 'North Indian'
+How many restaurants are in Whitefield?,True,0,SELECT count(*) FROM restaurants WHERE location = 'Whitefield';
+How many restaurants have no rating?,True,0,SELECT COUNT(*) FROM restaurants WHERE rate IS NULL
+Which 3 areas have the most North Indian restaurants?,False,0,SELECT r.listing_area FROM restaurants r JOIN restaurant_cuisines rc ON r.restaurant_id = rc.restaurant_id WHERE rc.cuisine = 'North Indian' GROUP BY r.listing_area ORDER BY count(*) DESC LIMIT 3
+How many restaurants cost under 300 for two?,True,0,SELECT count(*) FROM restaurants WHERE cost_for_two < 300
+Which cuisine has the highest average rating among cuisines with at least 100 restaurants?,True,0,SELECT rc.cuisine FROM restaurant_cuisines rc JOIN restaurants r ON rc.restaurant_id = r.restaurant_id WHERE r.rate IS NOT NULL GROUP BY rc.cuisine HAVING COUNT(DISTINCT r.restaurant_id) >= 100 ORDER BY AVG(r.rate) DESC LIMIT 1

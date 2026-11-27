@@ -1,0 +1,17 @@
+question,correct,fixes,agent_sql
+How many restaurants are in BTM?,True,0,SELECT COUNT(*) FROM restaurants WHERE location = 'BTM'
+What is the average cost for two in Indiranagar? Round to a whole number.,True,0,SELECT ROUND(AVG(cost_for_two)) FROM restaurants WHERE location = 'Indiranagar';
+Which 3 cuisines have the most restaurants in HSR?,True,0,"SELECT rc.cuisine, COUNT(r.restaurant_id) AS restaurant_count
+FROM restaurants r
+JOIN restaurant_cuisines rc ON r.restaurant_id = rc.restaurant_id
+WHERE r.location = 'HSR'
+GROUP BY rc.cuisine
+ORDER BY restaurant_count DESC
+LIMIT 3;"
+How many restaurants have a rating of 4.5 or higher?,True,0,SELECT COUNT(*) FROM restaurants WHERE rate >= 4.5;
+Which area has the most restaurants that offer table booking?,True,0,SELECT location FROM restaurants WHERE book_table = 'Yes' GROUP BY location ORDER BY COUNT(*) DESC LIMIT 1
+What percentage of restaurants offer online ordering? Round to 1 decimal.,True,0,"SELECT ROUND(100.0 * SUM(CASE WHEN online_order = 'Yes' THEN 1 ELSE 0 END) / COUNT(*), 1) FROM restaurants"
+Which restaurant has the most votes?,True,0,SELECT name FROM restaurants ORDER BY votes DESC LIMIT 1
+How many different cuisines are there?,True,0,SELECT COUNT(DISTINCT cuisine) FROM restaurant_cuisines
+Which area has the highest average cost for two among areas with at least 30 restaurants?,True,0,SELECT location FROM restaurants WHERE location IS NOT NULL GROUP BY location HAVING COUNT(restaurant_id) >= 30 ORDER BY AVG(cost_for_two) DESC LIMIT 1
+How many restaurants serve both North Indian and Chinese cuisine?,True,0,SELECT count(DISTINCT r1.restaurant_id) FROM restaurant_cuisines r1 JOIN restaurant_cuisines r2 ON r1.restaurant_id = r2.restaurant_id WHERE r1.cuisine = 'North Indian' AND r2.cuisine = 'Chinese'
